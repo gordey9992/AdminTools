@@ -52,10 +52,6 @@ public class ParticleCommand implements CommandExecutor {
             case "огонь":
                 startFlameParticles(player);
                 break;
-            case "rainbow":
-            case "радуга":
-                startRainbowParticles(player);
-                break;
             case "halo":
             case "нимб":
                 startHaloParticles(player);
@@ -63,14 +59,6 @@ public class ParticleCommand implements CommandExecutor {
             case "magic":
             case "магия":
                 startMagicParticles(player);
-                break;
-            case "water":
-            case "вода":
-                startWaterParticles(player);
-                break;
-            case "lava":
-            case "лава":
-                startLavaParticles(player);
                 break;
             default:
                 player.sendMessage("§cНеизвестный тип эффекта! Используйте §e/particles список");
@@ -90,11 +78,8 @@ public class ParticleCommand implements CommandExecutor {
         player.sendMessage("§6§lДоступные Эффекты Частиц:");
         player.sendMessage("§aсердце §7- Сердца вокруг вас");
         player.sendMessage("§aогонь §7- Огненный след");
-        player.sendMessage("§aрадуга §7- Радужная спираль");
         player.sendMessage("§aнимб §7- Ангельский нимб");
         player.sendMessage("§aмагия §7- Магический вихрь");
-        player.sendMessage("§aвода §7- Водная аура");
-        player.sendMessage("§aлава §7- Капли лавы");
     }
     
     private void stopParticles(Player player) {
@@ -120,40 +105,6 @@ public class ParticleCommand implements CommandExecutor {
             }
         }.runTaskTimer(plugin, 0L, 5L);
         player.sendMessage("§aЭффект частиц §eогонь §aвключен!");
-    }
-    
-    private void startRainbowParticles(Player player) {
-        new BukkitRunnable() {
-            double angle = 0;
-            public void run() {
-                Location loc = player.getLocation();
-                for (int i = 0; i < 6; i++) {
-                    double x = Math.cos(angle + i) * 1.5;
-                    double z = Math.sin(angle + i) * 1.5;
-                    Location particleLoc = loc.clone().add(x, 2, z);
-                    
-                    // Простая радуга с разными цветами
-                    Color color = getRainbowColor(i);
-                    DustOptions dustOptions = new DustOptions(color, 1.0f);
-                    
-                    player.spawnParticle(Particle.DUST, particleLoc, 1, dustOptions);
-                }
-                angle += 0.3;
-            }
-        }.runTaskTimer(plugin, 0L, 2L);
-        player.sendMessage("§aЭффект частиц §eрадуга §aвключен!");
-    }
-    
-    private Color getRainbowColor(int index) {
-        switch (index % 6) {
-            case 0: return Color.RED;
-            case 1: return Color.ORANGE;
-            case 2: return Color.YELLOW;
-            case 3: return Color.GREEN;
-            case 4: return Color.BLUE;
-            case 5: return Color.PURPLE;
-            default: return Color.WHITE;
-        }
     }
     
     private void startHaloParticles(Player player) {
@@ -189,27 +140,5 @@ public class ParticleCommand implements CommandExecutor {
             }
         }.runTaskTimer(plugin, 0L, 3L);
         player.sendMessage("§aЭффект частиц §eмагия §aвключен!");
-    }
-    
-    private void startWaterParticles(Player player) {
-        new BukkitRunnable() {
-            public void run() {
-                Location loc = player.getLocation().add(0, 1, 0);
-                player.spawnParticle(Particle.SPLASH, loc, 15, 1, 1, 1, 0.1);
-                player.spawnParticle(Particle.FALLING_WATER, loc, 10, 1, 1, 1, 0.05);
-            }
-        }.runTaskTimer(plugin, 0L, 8L);
-        player.sendMessage("§aЭффект частиц §eвода §aвключен!");
-    }
-    
-    private void startLavaParticles(Player player) {
-        new BukkitRunnable() {
-            public void run() {
-                Location loc = player.getLocation().add(0, 1, 0);
-                player.spawnParticle(Particle.LAVA, loc, 5, 0.5, 0.5, 0.5, 0.1);
-                player.spawnParticle(Particle.FLAME, loc, 3, 0.3, 0.3, 0.3, 0.02);
-            }
-        }.runTaskTimer(plugin, 0L, 15L);
-        player.sendMessage("§aЭффект частиц §eлава §aвключен!");
     }
 }
