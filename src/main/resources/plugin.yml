@@ -1,7 +1,7 @@
 name: AdminTools
 version: 1.0.0
 main: com.yourname.admintools.AdminTools
-api-version: "1.20"
+api-version: "1.21.8"
 author: YourName
 description: Продвинутые админ-инструменты с частицами, модерацией и никами
 
