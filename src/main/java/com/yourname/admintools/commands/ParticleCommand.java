@@ -8,9 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ParticleCommand implements CommandExecutor {
     
     private final AdminTools plugin;
@@ -29,7 +26,7 @@ public class ParticleCommand implements CommandExecutor {
         Player player = (Player) sender;
         
         if (!player.hasPermission("admintools.particles")) {
-            player.sendMessage("§cУ вас нет разрешения на использование этой команды!");
+            sender.sendMessage("§cУ вас нет разрешения на использование этой команды!");
             return true;
         }
         
@@ -109,7 +106,7 @@ public class ParticleCommand implements CommandExecutor {
         new BukkitRunnable() {
             public void run() {
                 Location loc = player.getLocation().add(0, 2, 0);
-                player.getWorld().spawnParticle(Particle.HEART, loc, 5, 0.5, 0.5, 0.5, 0.1);
+                player.spawnParticle(Particle.HEART, loc, 5, 0.5, 0.5, 0.5, 0.1);
             }
         }.runTaskTimer(plugin, 0L, 10L);
         player.sendMessage("§aЭффект частиц §eсердце §aвключен!");
@@ -119,7 +116,7 @@ public class ParticleCommand implements CommandExecutor {
         new BukkitRunnable() {
             public void run() {
                 Location loc = player.getLocation();
-                player.getWorld().spawnParticle(Particle.FLAME, loc, 10, 0.2, 0.2, 0.2, 0.05);
+                player.spawnParticle(Particle.FLAME, loc, 10, 0.2, 0.2, 0.2, 0.05);
             }
         }.runTaskTimer(plugin, 0L, 5L);
         player.sendMessage("§aЭффект частиц §eогонь §aвключен!");
@@ -134,12 +131,15 @@ public class ParticleCommand implements CommandExecutor {
                     double x = Math.cos(angle + i) * 1.5;
                     double z = Math.sin(angle + i) * 1.5;
                     Location particleLoc = loc.clone().add(x, 2, z);
-                    player.getWorld().spawnParticle(Particle.REDSTONE, particleLoc, 1, 
-                        new Particle.DustOptions(Color.fromRGB(
-                            (int)(Math.sin(angle + i) * 127 + 128),
-                            (int)(Math.sin(angle + i + 2) * 127 + 128),
-                            (int)(Math.sin(angle + i + 4) * 127 + 128)
-                        ), 1));
+                    
+                    // Создаем DustOptions с цветом
+                    DustTransition transition = new DustTransition(
+                        Color.fromRGB(255, 0, 0), // начальный цвет
+                        Color.fromRGB(0, 0, 255), // конечный цвет
+                        1.0f // размер
+                    );
+                    
+                    player.spawnParticle(Particle.DUST_COLOR_TRANSITION, particleLoc, 1, transition);
                 }
                 angle += 0.3;
             }
@@ -156,7 +156,7 @@ public class ParticleCommand implements CommandExecutor {
                     double x = Math.cos(angle + i * 0.5) * 0.7;
                     double z = Math.sin(angle + i * 0.5) * 0.7;
                     Location particleLoc = loc.clone().add(x, 2.3, z);
-                    player.getWorld().spawnParticle(Particle.END_ROD, particleLoc, 1);
+                    player.spawnParticle(Particle.ELECTRIC_SPARK, particleLoc, 1);
                 }
                 angle += 0.2;
             }
@@ -174,7 +174,7 @@ public class ParticleCommand implements CommandExecutor {
                     double z = Math.sin(angle + i) * 1.2;
                     double y = Math.sin(angle * 2 + i) * 0.5 + 1.5;
                     Location particleLoc = loc.clone().add(x, y, z);
-                    player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, particleLoc, 2);
+                    player.spawnParticle(Particle.ENCHANT, particleLoc, 2);
                 }
                 angle += 0.2;
             }
@@ -186,8 +186,8 @@ public class ParticleCommand implements CommandExecutor {
         new BukkitRunnable() {
             public void run() {
                 Location loc = player.getLocation().add(0, 1, 0);
-                player.getWorld().spawnParticle(Particle.WATER_SPLASH, loc, 15, 1, 1, 1, 0.1);
-                player.getWorld().spawnParticle(Particle.WATER_DROP, loc, 10, 1, 1, 1, 0.05);
+                player.spawnParticle(Particle.SPLASH, loc, 15, 1, 1, 1, 0.1);
+                player.spawnParticle(Particle.FALLING_WATER, loc, 10, 1, 1, 1, 0.05);
             }
         }.runTaskTimer(plugin, 0L, 8L);
         player.sendMessage("§aЭффект частиц §eвода §aвключен!");
@@ -197,8 +197,8 @@ public class ParticleCommand implements CommandExecutor {
         new BukkitRunnable() {
             public void run() {
                 Location loc = player.getLocation().add(0, 1, 0);
-                player.getWorld().spawnParticle(Particle.LAVA, loc, 5, 0.5, 0.5, 0.5, 0.1);
-                player.getWorld().spawnParticle(Particle.FLAME, loc, 3, 0.3, 0.3, 0.3, 0.02);
+                player.spawnParticle(Particle.LAVA, loc, 5, 0.5, 0.5, 0.5, 0.1);
+                player.spawnParticle(Particle.FLAME, loc, 3, 0.3, 0.3, 0.3, 0.02);
             }
         }.runTaskTimer(plugin, 0L, 15L);
         player.sendMessage("§aЭффект частиц §eлава §aвключен!");
