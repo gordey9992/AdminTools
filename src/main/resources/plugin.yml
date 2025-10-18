@@ -1,0 +1,65 @@
+name: AdminTools
+version: 1.0.0
+main: com.yourname.admintools.AdminTools
+api-version: "1.20"
+author: YourName
+description: Advanced admin tools with particles, moderation and more
+
+commands:
+  particles:
+    description: Particle effects system
+    usage: /particles <type|list|stop>
+    aliases: [particle, effect]
+  vanish:
+    description: Vanish mode
+    usage: /vanish
+    aliases: [v, hide]
+  nick:
+    description: Change your nickname
+    usage: /nick <name> [color]
+    aliases: [nickname, name]
+  invsee:
+    description: View player's inventory
+    usage: /invsee <player>
+    aliases: [inventorysee, openinv]
+  whois:
+    description: Get player information
+    usage: /whois <player>
+    aliases: [playerinfo, info]
+  admin:
+    description: Admin tools main command
+    usage: /admin <fly|heal|god|feed|repair>
+    aliases: [a, adm]
+
+permissions:
+  admintools.*:
+    description: All AdminTools permissions
+    children:
+      admintools.particles: true
+      admintools.vanish: true
+      admintools.nick: true
+      admintools.invsee: true
+      admintools.whois: true
+      admintools.admin: true
+      admintools.seevanished: true
+  admintools.particles:
+    description: Access to particle effects
+    default: op
+  admintools.vanish:
+    description: Access to vanish mode
+    default: op
+  admintools.nick:
+    description: Change nickname
+    default: op
+  admintools.invsee:
+    description: View other players inventory
+    default: op
+  admintools.whois:
+    description: Get player information
+    default: op
+  admintools.admin:
+    description: Admin commands
+    default: op
+  admintools.seevanished:
+    description: See vanished players
+    default: op
