@@ -14,9 +14,6 @@ public class AdminTools extends JavaPlugin {
     public void onEnable() {
         instance = this;
         
-        // Создаем папку плагина если её нет
-        saveDefaultConfig();
-        
         // Инициализация менеджеров
         this.configManager = new ConfigManager(this);
         configManager.loadMessages();
