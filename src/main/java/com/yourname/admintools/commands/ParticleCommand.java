@@ -132,19 +132,28 @@ public class ParticleCommand implements CommandExecutor {
                     double z = Math.sin(angle + i) * 1.5;
                     Location particleLoc = loc.clone().add(x, 2, z);
                     
-                    // Создаем DustOptions с цветом
-                    DustTransition transition = new DustTransition(
-                        Color.fromRGB(255, 0, 0), // начальный цвет
-                        Color.fromRGB(0, 0, 255), // конечный цвет
-                        1.0f // размер
-                    );
+                    // Простая радуга с разными цветами
+                    Color color = getRainbowColor(i);
+                    DustOptions dustOptions = new DustOptions(color, 1.0f);
                     
-                    player.spawnParticle(Particle.DUST_COLOR_TRANSITION, particleLoc, 1, transition);
+                    player.spawnParticle(Particle.DUST, particleLoc, 1, dustOptions);
                 }
                 angle += 0.3;
             }
         }.runTaskTimer(plugin, 0L, 2L);
         player.sendMessage("§aЭффект частиц §eрадуга §aвключен!");
+    }
+    
+    private Color getRainbowColor(int index) {
+        switch (index % 6) {
+            case 0: return Color.RED;
+            case 1: return Color.ORANGE;
+            case 2: return Color.YELLOW;
+            case 3: return Color.GREEN;
+            case 4: return Color.BLUE;
+            case 5: return Color.PURPLE;
+            default: return Color.WHITE;
+        }
     }
     
     private void startHaloParticles(Player player) {
