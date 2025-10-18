@@ -3,37 +3,37 @@ version: 1.0.0
 main: com.yourname.admintools.AdminTools
 api-version: "1.20"
 author: YourName
-description: Advanced admin tools with particles, moderation and more
+description: Продвинутые админ-инструменты с частицами, модерацией и никами
 
 commands:
   particles:
-    description: Particle effects system
-    usage: /particles <type|list|stop>
-    aliases: [particle, effect]
+    description: Система эффектов частиц
+    usage: /particles <тип|список|стоп>
+    aliases: [particle, эффекты]
   vanish:
-    description: Vanish mode
+    description: Режим невидимки
     usage: /vanish
-    aliases: [v, hide]
+    aliases: [v, невидимка]
   nick:
-    description: Change your nickname
-    usage: /nick <name> [color]
-    aliases: [nickname, name]
+    description: Изменить никнейм
+    usage: /nick <ник> [цвет]
+    aliases: [ник, имя]
   invsee:
-    description: View player's inventory
-    usage: /invsee <player>
-    aliases: [inventorysee, openinv]
+    description: Просмотр инвентаря игрока
+    usage: /invsee <игрок>
+    aliases: [инвентарь, инв]
   whois:
-    description: Get player information
-    usage: /whois <player>
-    aliases: [playerinfo, info]
+    description: Информация об игроке
+    usage: /whois <игрок>
+    aliases: [игрок, инфо]
   admin:
-    description: Admin tools main command
-    usage: /admin <fly|heal|god|feed|repair>
-    aliases: [a, adm]
+    description: Основная команда админа
+    usage: /admin <полет|лечение|бессмертие|еда|починка>
+    aliases: [а, админ]
 
 permissions:
   admintools.*:
-    description: All AdminTools permissions
+    description: Все разрешения AdminTools
     children:
       admintools.particles: true
       admintools.vanish: true
@@ -43,23 +43,23 @@ permissions:
       admintools.admin: true
       admintools.seevanished: true
   admintools.particles:
-    description: Access to particle effects
+    description: Доступ к эффектам частиц
     default: op
   admintools.vanish:
-    description: Access to vanish mode
+    description: Доступ к режиму невидимки
     default: op
   admintools.nick:
-    description: Change nickname
+    description: Изменение никнейма
     default: op
   admintools.invsee:
-    description: View other players inventory
+    description: Просмотр инвентаря других игроков
     default: op
   admintools.whois:
-    description: Get player information
+    description: Получение информации об игроках
     default: op
   admintools.admin:
-    description: Admin commands
+    description: Административные команды
     default: op
   admintools.seevanished:
-    description: See vanished players
+    description: Видеть невидимых игроков
     default: op
