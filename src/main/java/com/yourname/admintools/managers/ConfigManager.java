@@ -6,7 +6,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,10 +36,7 @@ public class ConfigManager {
     }
     
     private void saveDefaultMessages() {
-        if (!messagesFile.exists()) {
-            plugin.saveResource("messages.yml", false);
-            plugin.getLogger().info("Файл messages.yml создан!");
-        }
+        plugin.saveResource("messages.yml", false);
     }
     
     private void loadAllMessages() {
