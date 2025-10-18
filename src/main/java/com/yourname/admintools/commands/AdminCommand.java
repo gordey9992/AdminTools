@@ -113,7 +113,7 @@ public class AdminCommand implements CommandExecutor {
         target.setFoodLevel(20);
         target.setSaturation(20);
         
-        sender.sendMessage("§aИгрок §e" + target.getName() + " §aнасыщен");
+        sender.sendMessage("§aИгрок §e" + target.getName() + " §анасыщен");
         target.sendMessage("§aВы были насыщены!");
     }
     
