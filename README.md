@@ -1,0 +1,2 @@
+# AdminTools
+Плагин AdminTools
